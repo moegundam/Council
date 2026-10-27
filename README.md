@@ -23,6 +23,18 @@ Council 把多 Agent 討論、人工治理、決議、任務與證據放在同�
 
 Council 不附模型、託管帳號或固定供應商。你可以接入自己的 OpenAI-compatible 模型服務，設定 Agent 的 Role、Prompt、Skill、MCP 工具與執行邊界。
 
+### Agent 執行引擎
+
+Council 支援多種 Agent harness。程式工作可使用你提到的 **Pi Agent 路徑**：專案固定整合 [Oh My Pi（OMP）v18.1.2](https://github.com/can1357/oh-my-pi/tree/v18.1.2)，透過 OMP RPC 在隔離 runtime 中執行。一般會議發言與文字任務則預設直接使用 OpenAI-compatible connector。
+
+| 執行路徑 | Harness | 預設狀態 | 用途與邊界 |
+|---|---|---|---|
+| 一般會議／文字任務 | `openai_compatible` | 啟用 | 經使用者設定的 Model Connector 執行文字回合 |
+| 受核准的程式工作 | `pi`（Oh My Pi／OMP） | 關閉 | 只供 `omp_coding` 任務；由 Sandbox Broker 啟動 rootless 隔離容器 |
+| Codex CLI | `codex` | 關閉 | 選用的獨立 CLI harness |
+
+自架預設 `OMP_RUNTIME_ENABLED=false`。啟用 Pi／OMP 前，管理者必須核准 Runtime Profile，固定 runtime image 與 workspace digest，提供已驗證的隔離設定；目前 OMP 第一階段只接受本機 Model Connector。
+
 ### 可以做什麼
 
 | 範圍 | 能力 |

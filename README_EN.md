@@ -23,6 +23,18 @@ The core workflow is:
 
 Council does not bundle a model, hosted account, or required provider. Connect your own OpenAI-compatible model service, then configure each Agent's role, prompt, skills, MCP tools, and execution boundaries.
 
+### Agent runtimes
+
+Council supports several Agent harnesses. Coding work can use the **Pi Agent path** you remembered: the project pins [Oh My Pi (OMP) v18.1.2](https://github.com/can1357/oh-my-pi/tree/v18.1.2) and runs it through OMP RPC in an isolated runtime. Regular meeting turns and text tasks use the OpenAI-compatible connector by default.
+
+| Execution path | Harness | Default | Purpose and boundary |
+|---|---|---|---|
+| Meetings and text tasks | `openai_compatible` | Enabled | Runs text turns through the operator-configured Model Connector |
+| Approved coding work | `pi` (Oh My Pi/OMP) | Disabled | Reserved for `omp_coding`; Sandbox Broker starts a rootless isolated container |
+| Codex CLI | `codex` | Disabled | Optional independent CLI harness |
+
+Self-hosting sets `OMP_RUNTIME_ENABLED=false` by default. Before enabling Pi/OMP, an operator must approve the Runtime Profile, pin the runtime image and workspace digests, and provide verified isolation settings. The current first OMP phase accepts local Model Connectors only.
+
 ### What Council provides
 
 | Area | Capabilities |
