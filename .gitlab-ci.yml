@@ -38,7 +38,7 @@ secret-scan:
     name: ghcr.io/gitleaks/gitleaks:v8.30.1
     entrypoint: [""]
   script:
-    - gitleaks dir . --redact --no-banner --exit-code 1
+    - gitleaks git . --redact --no-banner --exit-code 1
 
 browser-e2e:
   extends: .node-job
