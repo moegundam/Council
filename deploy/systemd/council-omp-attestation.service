@@ -1,0 +1,16 @@
+[Unit]
+Description=Refresh Council OMP rootless isolation attestation
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/council/compose/agent-meeting-platform/refresh-omp-attestation.sh
+NoNewPrivileges=true
+# The host RootlessKit socket rejects clients moved into a separate mount namespace.
+PrivateTmp=false
+ProtectHome=false
+ProtectSystem=false
+RestrictAddressFamilies=AF_UNIX
+RestrictSUIDSGID=true
+LockPersonality=true
+UMask=0077

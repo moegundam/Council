@@ -1,0 +1,35 @@
+{
+  "name": "@council/database",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "development": "./src/index.ts",
+      "import": "./dist/index.js"
+    },
+    "./seed": {
+      "types": "./src/seed.ts",
+      "development": "./src/seed.ts",
+      "import": "./dist/seed.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "migrate": "tsx src/migrate.ts",
+    "sync:legacy-projections": "tsx src/sync-legacy-projections.ts"
+  },
+  "dependencies": {
+    "@council/contracts": "workspace:*",
+    "@council/domain": "workspace:*",
+    "pg": "8.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0",
+    "@types/pg": "8.20.0"
+  },
+  "license": "AGPL-3.0-only"
+}

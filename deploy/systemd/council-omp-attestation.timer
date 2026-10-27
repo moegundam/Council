@@ -1,0 +1,12 @@
+[Unit]
+Description=Refresh Council OMP isolation evidence before expiry
+
+[Timer]
+OnBootSec=10m
+OnUnitActiveSec=12h
+RandomizedDelaySec=5m
+Persistent=true
+Unit=council-omp-attestation.service
+
+[Install]
+WantedBy=timers.target

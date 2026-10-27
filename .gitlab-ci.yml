@@ -1,0 +1,56 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "codex/open-source-prep"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - when: never
+
+stages: [verify, security, e2e]
+
+.node-job:
+  tags: [codexci-linux]
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@11.7.0 --activate
+    - pnpm install --frozen-lockfile
+
+verify:
+  extends: .node-job
+  stage: verify
+  parallel:
+    matrix:
+      - NODE_VERSION: ["22.18.0", "24.14.0"]
+  image: node:${NODE_VERSION}-trixie-slim
+  timeout: 40m
+  script:
+    - pnpm verify
+    - pnpm sbom:generate
+  artifacts:
+    when: always
+    expire_in: 30 days
+    paths: [sbom/source-dependencies.spdx.json]
+
+secret-scan:
+  stage: security
+  tags: [codexci-linux]
+  image:
+    name: ghcr.io/gitleaks/gitleaks:v8.30.1
+    entrypoint: [""]
+  script:
+    - gitleaks dir . --redact --no-banner --exit-code 1
+
+browser-e2e:
+  extends: .node-job
+  stage: e2e
+  image: mcr.microsoft.com/playwright:v1.62.1-noble
+  timeout: 40m
+  variables:
+    E2E_DEPLOYMENT_CLASS: disposable
+    E2E_DISPOSABLE_MARKER: council-agent-meeting-platform-disposable-e2e-v1
+    E2E_REUSE_EXISTING_SERVER: "false"
+  script:
+    - pnpm test:e2e --reporter=line
+  artifacts:
+    when: on_failure
+    expire_in: 7 days
+    paths: [playwright-report, test-results]

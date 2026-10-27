@@ -1,0 +1,30 @@
+{
+  "name": "@council/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "development": "./src/index.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@council/contracts": "workspace:*",
+    "@council/domain": "workspace:*",
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "agent-control-specification": "0.3.1-beta.0",
+    "undici": "7.29.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0"
+  },
+  "license": "AGPL-3.0-only"
+}

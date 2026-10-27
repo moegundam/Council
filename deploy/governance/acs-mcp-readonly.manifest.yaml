@@ -1,0 +1,25 @@
+agent_control_specification_version: "0.3.1-beta"
+metadata:
+  name: council-mcp-readonly
+  version: "1.0.0"
+extends: []
+policies:
+  council_mcp_readonly:
+    type: rego
+    bundle: ./policy
+    query: data.council.agent_governance.pre_tool_call_verdict
+intervention_points:
+  pre_tool_call:
+    policy_target: "$.tool_call.args"
+    policy_target_kind: tool_args
+    tool_name_from: "$.tool_call.name"
+    policy:
+      id: council_mcp_readonly
+      query: data.council.agent_governance.pre_tool_call_verdict
+tools:
+  council_mcp_readonly:
+    type: Tool
+    id: council_mcp_readonly
+    clearance: [read-only]
+    security_labels: [platform-native-authorized]
+annotators: {}

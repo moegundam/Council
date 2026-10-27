@@ -1,0 +1,46 @@
+{
+  "name": "council-agent-meeting-platform",
+  "version": "0.1.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=22 <26"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @council/api --filter @council/web dev",
+    "demo": "AUTH_DISABLED=true API_BIND_HOST=127.0.0.1 PORT=4000 API_INTERNAL_URL=http://127.0.0.1:4000 pnpm --parallel --filter @council/api --filter @council/web dev",
+    "selfhost:init": "tsx scripts/selfhost-init.ts",
+    "selfhost:up": "bash scripts/selfhost-up.sh",
+    "selfhost:down": "bash scripts/selfhost-down.sh",
+    "selfhost:create-owner": "bash scripts/selfhost-create-owner.sh",
+    "sbom:generate": "node scripts/generate-source-sbom.mjs",
+    "sbom:containers": "bash scripts/generate-container-sboms.sh",
+    "docs:screenshots": "node scripts/capture-public-docs.mjs",
+    "provenance:manifest": "node scripts/generate-public-file-manifest.mjs",
+    "build": "pnpm -r build",
+    "test": "vitest run",
+    "test:release": "REQUIRE_MIGRATION_TEST_DATABASE=1 REQUIRE_REDIS_RECOVERY_TEST=1 vitest run",
+    "test:migration:postgres": "vitest run packages/database/src/migrations.postgres.test.ts",
+    "test:deploy": "for test in ./deploy/scripts/*.test.sh; do bash \"$test\" || exit $?; done",
+    "test:e2e:policy": "tsx e2e/disposable-target.policy.ts",
+    "test:e2e:build": "NEXT_PUBLIC_GOAL_RUN_AUTONOMY_ENABLED=true NEXT_PUBLIC_TEST_LOGIN_ENABLED=true pnpm --filter @council/web... build",
+    "test:e2e": "pnpm run test:e2e:policy && pnpm run test:e2e:build && E2E_DEPLOYMENT_CLASS=disposable E2E_DISPOSABLE_MARKER=council-agent-meeting-platform-disposable-e2e-v1 playwright test",
+    "test:e2e:container": "pnpm run test:e2e:policy && pnpm run test:e2e:build && bash ./deploy/scripts/run-disposable-e2e-container.sh",
+    "test:watch": "vitest",
+    "typecheck": "pnpm -r typecheck",
+    "verify": "pnpm run typecheck && pnpm run test && pnpm run test:deploy && pnpm run build",
+    "verify:release": "pnpm run typecheck && pnpm run test:release && pnpm run test:deploy && pnpm run build",
+    "db:migrate": "pnpm --filter @council/database migrate",
+    "admin:create": "pnpm --filter @council/api admin:create",
+    "release:bundle": "bash ./deploy/scripts/create-release.sh"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@types/node": "24.3.0",
+    "@vitest/coverage-v8": "4.1.10",
+    "tsx": "4.20.5",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10"
+  }
+}

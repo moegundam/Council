@@ -1,0 +1,64 @@
+{
+  "name": "@council/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "types": "./src/index.ts",
+  "imports": {
+    "#*": {
+      "types": "./src/*.ts",
+      "development": "./src/*.ts",
+      "import": "./dist/*.js"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "development": "./src/index.ts",
+      "import": "./dist/index.js"
+    },
+    "./runtime-contracts": {
+      "types": "./src/runtime-contracts.ts",
+      "development": "./src/runtime-contracts.ts",
+      "import": "./dist/runtime-contracts.js"
+    },
+    "./tool-pack-contracts": {
+      "types": "./src/tool-pack-contracts.ts",
+      "development": "./src/tool-pack-contracts.ts",
+      "import": "./dist/tool-pack-contracts.js"
+    },
+    "./job-contracts": {
+      "types": "./src/job-contracts.ts",
+      "development": "./src/job-contracts.ts",
+      "import": "./dist/job-contracts.js"
+    },
+    "./api-contracts": {
+      "types": "./src/api-contracts.ts",
+      "development": "./src/api-contracts.ts",
+      "import": "./dist/api-contracts.js"
+    },
+    "./openapi-contracts": {
+      "types": "./src/openapi-contracts.ts",
+      "development": "./src/openapi-contracts.ts",
+      "import": "./dist/openapi-contracts.js"
+    },
+    "./goal-run-contracts": {
+      "types": "./src/goal-run-contracts.ts",
+      "development": "./src/goal-run-contracts.ts",
+      "import": "./dist/goal-run-contracts.js"
+    },
+    "./omp-broker-contracts": {
+      "types": "./src/omp-broker-contracts.ts",
+      "development": "./src/omp-broker-contracts.ts",
+      "import": "./dist/omp-broker-contracts.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "zod": "4.4.3"
+  },
+  "license": "AGPL-3.0-only"
+}
