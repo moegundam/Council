@@ -1,8 +1,9 @@
 {
   "schemaVersion": 1,
   "curationMethod": "new-root-from-approved-file-set",
-  "privateSourceCommit": "555625455325c7a15d49e68aa226d937e155eae6",
-  "includedImportPostimages": [
+  "privateSourceCommit": "defce314723e121b9c3635b9adeb6af219661225",
+  "sourceCommitIncludesVerifiedImportPostimages": true,
+  "verifiedImportPostimages": [
     {
       "path": "packages/contracts/src/goal-run-contracts.ts",
       "sha256": "ddd6301c9197a9cc49272b9e586a19618837fcec85c336670f4f38cdba6b65f8"
@@ -12,6 +13,7 @@
       "sha256": "e38d8be0b3eaa44ae3d7eafa192e125e2de090b61b77e4085d5773c157a9eaa9"
     }
   ],
+  "publicGitLabCiCuratedForExternalRunners": true,
   "privateGitHistoryCopied": false,
   "privateSourceMappingRetainedSeparately": true
 }
