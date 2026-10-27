@@ -35,6 +35,8 @@ Council supports several Agent harnesses. Coding work can use the **Pi Agent pat
 
 Self-hosting sets `OMP_RUNTIME_ENABLED=false` by default. Before enabling Pi/OMP, an operator must approve the Runtime Profile, pin the runtime image and workspace digests, and provide verified isolation settings. The current first OMP phase accepts local Model Connectors only.
 
+Oh My Pi, Codex CLI, and other third-party names identify actual integrations only. See [third-party notices](docs/THIRD_PARTY_NOTICES.md) for versions, sources, licenses, and redistribution requirements.
+
 ### What Council provides
 
 | Area | Capabilities |

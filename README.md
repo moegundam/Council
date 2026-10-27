@@ -35,6 +35,8 @@ Council 支援多種 Agent harness。程式工作可使用你提到的 **Pi Agen
 
 自架預設 `OMP_RUNTIME_ENABLED=false`。啟用 Pi／OMP 前，管理者必須核准 Runtime Profile，固定 runtime image 與 workspace digest，提供已驗證的隔離設定；目前 OMP 第一階段只接受本機 Model Connector。
 
+Oh My Pi、Codex CLI 與其他第三方名稱只用來說明實際整合；版本、來源、授權及再散布要求見[第三方聲明](docs/THIRD_PARTY_NOTICES.md)。
+
 ### 可以做什麼
 
 | 範圍 | 能力 |
