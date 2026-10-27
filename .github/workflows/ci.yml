@@ -1,4 +1,4 @@
-name: CI
+name: Council CI
 
 on:
   push:

@@ -1,4 +1,5 @@
 workflow:
+  name: "Council CI · $CI_COMMIT_REF_NAME"
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "codex/open-source-prep"'
